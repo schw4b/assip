@@ -1,10 +1,14 @@
 # by Simon Schwab, schwab@puk.unibe.ch, 2015
 # University Hospital of Psychiatry, and University of Bern.
 
-# Statistical analysis protocol for the ASSIP trial
+# Statistical analysis for the ASSIP trial
 # Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015).
 # A novel brief therapy for attempted suicide: Two year follow-up randomized
 # controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
+
+# This is a short analysis script to replicate the main findings of our study
+# using the original data. Result in our paper may slightly differ because
+# these are based on twenty imputed dataset.
 
 # install and load required package(s)
 install.packages("survival")
