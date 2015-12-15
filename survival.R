@@ -6,8 +6,13 @@
 # A novel brief therapy for attempted suicide: Two year follow-up randomized
 # controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
 
+# install and load required package(s)
+install.packages("survival")
+library(survival)
+
 # loading  data ----
 load("assip.RData")
+summary(mydata)
 
 repeater = c(
   as.character(mydata$repeater_t2), #  6 months
