@@ -1,7 +1,7 @@
 # Data and analysis for the ASSIP trial
 This repository contains data and analyses from the ASSIP 24-months follow-up randomized controlled study.
 
-We provide a short analysis script (survival.R) to replicate the main findings of our study using the original data (assip.RData). Results in our paper may slightly differ because these are based on twenty imputed dataset. Variable description and statistical output see below.
+We provide a short analysis script (`survival.R`) to replicate the main findings of our study using the original data (`assip.RData`). Results in our paper may slightly differ because these are based on twenty imputed dataset. Variable description and statistical output see below.
 
 Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel brief therapy for attempted suicide: Two year follow-up randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP). Manuscript submitted for publication.
 
