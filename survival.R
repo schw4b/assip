@@ -7,7 +7,7 @@
 # controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
 
 # This is a short analysis script to replicate the main findings of our study
-# using the original data. Result in our paper may slightly differ because
+# using the original data. Results in our paper may slightly differ because
 # these are based on twenty imputed dataset.
 
 # install and load required package(s)
