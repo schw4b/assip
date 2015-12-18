@@ -44,9 +44,6 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	   24     42       5    0.768  0.0513        0.673        0.875
 	
 ## Group difference
-
-For hazard ratio see ``exp(-coef)`` below
-
 	> 
 	> # group difference (Mantel-Haenszel) ----
 	> survdiff(Surv(time, repeater) ~ group, rho=0)
@@ -62,6 +59,9 @@ For hazard ratio see ``exp(-coef)`` below
 	 Chisq= 16.1  on 1 degrees of freedom, p= 5.99e-05 
 
 ## Cox hazard ratio (in bold below)
+
+For hazard ratio see ``exp(-coef)`` below
+
 	> # Cox hazard for discrete data ----
 	> hazard <- coxph(Surv(time, repeater) ~ group, ties="exact")
 	> summary(hazard)
