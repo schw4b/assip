@@ -58,7 +58,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	
 	 Chisq= 16.1  on 1 degrees of freedom, p= 5.99e-05 
 
-### Cox hazard ratio (in bold below)
+### Cox hazard ratio
 
 For hazard ratio see ``exp(-coef)`` below
 
