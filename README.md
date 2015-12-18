@@ -44,6 +44,9 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	   24     42       5    0.768  0.0513        0.673        0.875
 	
 ## Group difference
+
+For hazard ratio see ``exp(-coef)`` below
+
 	> 
 	> # group difference (Mantel-Haenszel) ----
 	> survdiff(Surv(time, repeater) ~ group, rho=0)
@@ -74,7 +77,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 	
 	                      exp(coef) exp(-coef) lower .95 upper .95
-	groupCG & CG Drop out     5.945     **0.1682**     2.229     15.86
+	groupCG & CG Drop out     5.945     0.1682     2.229     15.86
 	
 	Rsquare= 0.04   (max possible= 0.421 )
 	Likelihood ratio test= 16.75  on 1 df,   p=4.268e-05
