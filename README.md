@@ -42,6 +42,8 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	   12    134       5    0.926  0.0207        0.887        0.968
 	   18     84       5    0.871  0.0308        0.813        0.934
 	   24     42       5    0.768  0.0513        0.673        0.875
+	   
+![alt tag](/survival.png)
 	
 ### Group difference
 	> 
@@ -59,7 +61,6 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	 Chisq= 16.1  on 1 degrees of freedom, p= 5.99e-05 
 
 ### Cox hazard ratio
-
 For hazard ratio see ``exp(-coef)`` below
 
 	> # Cox hazard for discrete data ----
@@ -83,5 +84,3 @@ For hazard ratio see ``exp(-coef)`` below
 	Likelihood ratio test= 16.75  on 1 df,   p=4.268e-05
 	Wald test            = 12.68  on 1 df,   p=0.0003695
 	Score (logrank) test = 16.11  on 1 df,   p=5.992e-05
-	
-	
