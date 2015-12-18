@@ -25,6 +25,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
     sum_stat_24months	Sum of outpatient days after 24 months
     
 ## Output
+# Survival
 	Call: survfit(formula = Surv(time, repeater) ~ group, type = "kaplan-meier")
 	
 	65 observations deleted due to missingness 
@@ -42,6 +43,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	   18     84       5    0.871  0.0308        0.813        0.934
 	   24     42       5    0.768  0.0513        0.673        0.875
 	
+## Group difference
 	> 
 	> # group difference (Mantel-Haenszel) ----
 	> survdiff(Surv(time, repeater) ~ group, rho=0)
@@ -55,6 +57,8 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	group=CG & CG Drop out       186       22     11.8      8.78      16.1
 	
 	 Chisq= 16.1  on 1 degrees of freedom, p= 5.99e-05 
+
+## Cox hazard ratio (in bold below)
 	> # Cox hazard for discrete data ----
 	> hazard <- coxph(Surv(time, repeater) ~ group, ties="exact")
 	> summary(hazard)
@@ -70,7 +74,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
 	
 	                      exp(coef) exp(-coef) lower .95 upper .95
-	groupCG & CG Drop out     5.945     0.1682     2.229     15.86
+	groupCG & CG Drop out     5.945     **0.1682**     2.229     15.86
 	
 	Rsquare= 0.04   (max possible= 0.421 )
 	Likelihood ratio test= 16.75  on 1 df,   p=4.268e-05
