@@ -43,7 +43,7 @@ Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015). A novel bri
 	   18     84       5    0.871  0.0308        0.813        0.934
 	   24     42       5    0.768  0.0513        0.673        0.875
 	   
-![alt tag](/survival.png)
+![alt tag](/survival.png =335x304)
 	
 ### Group difference
 	> 
