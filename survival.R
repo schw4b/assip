@@ -2,9 +2,10 @@
 # University Hospital of Psychiatry, and University of Bern.
 
 # Statistical analysis for the ASSIP trial
-# Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2015).
-# A novel brief therapy for attempted suicide: Two year follow-up randomized
-# controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
+# Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2016).
+# A Novel Brief Therapy for Patients Who Attempt Suicide: A 24-months follow-up
+# randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
+# PLoS Medicine. Manuscript accepted for publication.
 
 # This is a short analysis script to replicate the main findings of our study
 # using the original data. Results in our paper may slightly differ because
