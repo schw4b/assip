@@ -3,7 +3,7 @@ This repository contains data and analyses from the ASSIP 24-months follow-up ra
 
 We provide a short analysis script (`survival.R`) to replicate the main findings of our study using the original data (`assip.RData`). Results in our paper may slightly differ because these are based on twenty imputed dataset. Variable description and statistical output see below.
 
-Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2016). A Novel Brief Therapy for Patients Who Attempt Suicide: A 24-months follow-up randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP). PLoS Medicine 13(9):e1001968. 10.1371/journal.pmed.1001968. [Full paper](http://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001968)
+Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2016). A Novel Brief Therapy for Patients Who Attempt Suicide: A 24-months follow-up randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP). PLoS Medicine 13(9):e1001968. [10.1371/journal.pmed.1001968](http://journals.plos.org/plosmedicine/article?id=10.1371/journal.pmed.1001968).
 
 ## Variable description
     amb_sess_t1_6M	Number of outpatient sessions at time one (t1), including the last 6 months
