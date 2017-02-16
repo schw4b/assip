@@ -115,17 +115,17 @@ In the traditional survival analysis an event is generally associated with "deat
 
         	        mydata$ITT=ASSIP & ASSIP Drop out 
 	 time n.risk n.event survival std.err lower 95% CI upper 95% CI
-    	 6     59       1    0.983  0.0168        0.951        1.000
-   	12     58       1    0.966  0.0236        0.921        1.000
-   	18     54       1    0.948  0.0291        0.893        1.000
-   	24     53       2    0.912  0.0374        0.842        0.989
+	 6     59       1    0.983  0.0168        0.951        1.000
+	12     58       1    0.966  0.0236        0.921        1.000
+	18     54       1    0.948  0.0291        0.893        1.000
+	24     53       2    0.912  0.0374        0.842        0.989
 
         	        mydata$ITT=CG & CG Drop out 
  	time n.risk n.event survival std.err lower 95% CI upper 95% CI
-    	 6     53       7    0.868  0.0465        0.781        0.964
-   	12     44       3    0.809  0.0545        0.709        0.923
-   	18     37       4    0.721  0.0637        0.607        0.858
-   	24     30       2    0.673  0.0680        0.552        0.821
+	 6     53       7    0.868  0.0465        0.781        0.964
+	12     44       3    0.809  0.0545        0.709        0.923
+	18     37       4    0.721  0.0637        0.607        0.858
+	24     30       2    0.673  0.0680        0.552        0.821
 
 ### Group difference
 	> fit = survfit(Surv(time, event) ~ mydata$ITT, type="kaplan-meier")
