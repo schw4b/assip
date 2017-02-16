@@ -28,6 +28,8 @@ Article in [The Washington Post](https://www.washingtonpost.com/news/to-your-hea
     
 ## Output
 ### Survival
+	> fit = survfit(Surv(time, repeater) ~ group, type="kaplan-meier")
+	> summary(fit)
 	Call: survfit(formula = Surv(time, repeater) ~ group, type = "kaplan-meier")
 	
 	65 observations deleted due to missingness 
@@ -86,3 +88,76 @@ For hazard ratio see ``exp(-coef)`` below
 	Likelihood ratio test= 16.75  on 1 df,   p=4.268e-05
 	Wald test            = 12.68  on 1 df,   p=0.0003695
 	Score (logrank) test = 16.11  on 1 df,   p=5.992e-05
+	
+## Non-recurring events
+
+In the traditional survival analysis an event is generally associated with "death", and only one event is possible per subject (non-recurring events). However, recurring events relax this assumption and are also widely used in the literature, for example multiple relapses from remission for leukemia patients, repeated heart attacks, recurrence of bladder cancer tumors, or deteriorating episodes of visual acuity (Kleinbaum & Klein, 2005). Recurring analysis can be seen as repeated measures analysis, however one issue is that observations are not completely independent.
+
+### Restructure data for non-recurring events
+	E='Suizidversuch (mind. 1)'
+	time=rep(NA,120)
+	event=rep(NA,120)
+	for (i in 1:120) {
+  	  f = c(mydata$repeater_t2[i]==E, mydata$repeater_t3[i]==E, mydata$repeater_t4[i]==E, mydata$repeater_t5[i]==E)
+  	  if (sum(f, na.rm = T) > 0) { # time to event
+    	    time[i]=which(f)[1]*6; event[i]=1
+  	  } else {  # censoring
+    	    c=tail(which(!f), n=1)
+    	    if (length(c) > 0) {time[i]=c*6; event[i]=0}
+    	    else {time[i]=0; event[i]=0}
+  	  }
+	}
+
+### Survival
+	> fit = survfit(Surv(time, event) ~ mydata$ITT, type="kaplan-meier")
+	> summary(fit)
+	Call: survfit(formula = Surv(time, event) ~ mydata$ITT, type = "kaplan-meier")
+
+        	        mydata$ITT=ASSIP & ASSIP Drop out 
+	 time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    	 6     59       1    0.983  0.0168        0.951        1.000
+   	12     58       1    0.966  0.0236        0.921        1.000
+   	18     54       1    0.948  0.0291        0.893        1.000
+   	24     53       2    0.912  0.0374        0.842        0.989
+
+        	        mydata$ITT=CG & CG Drop out 
+ 	time n.risk n.event survival std.err lower 95% CI upper 95% CI
+    	 6     53       7    0.868  0.0465        0.781        0.964
+   	12     44       3    0.809  0.0545        0.709        0.923
+   	18     37       4    0.721  0.0637        0.607        0.858
+   	24     30       2    0.673  0.0680        0.552        0.821
+
+### Group difference
+	> fit = survfit(Surv(time, event) ~ mydata$ITT, type="kaplan-meier")
+	> summary(fit)
+	
+	Call:
+	survdiff(formula = Surv(time, event) ~ mydata$ITT, rho = 0)
+
+	                                   N Observed Expected (O-E)^2/E (O-E)^2/V
+	mydata$ITT=ASSIP & ASSIP Drop out 60        5    12.01      4.09      10.1
+	mydata$ITT=CG & CG Drop out       60       16     8.99      5.47      10.1
+	
+ 	Chisq= 10.1  on 1 degrees of freedom, p= 0.00148
+
+### Cox hazard ratio
+
+	> hazard <- coxph(Surv(time, event) ~ mydata$ITT, ties="exact")
+	> summary(hazard)
+	Call:
+	coxph(formula = Surv(time, event) ~ mydata$ITT, ties = "exact")
+
+  	n= 120, number of events= 21 
+	
+	                             coef exp(coef) se(coef)     z Pr(>|z|)   
+	mydata$ITTCG & CG Drop out 1.5294    4.6156   0.5228 2.926  0.00344 **
+	---
+	Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+	
+	                           exp(coef) exp(-coef) lower .95 upper .95
+	mydata$ITTCG & CG Drop out     4.616     0.2167     1.657     12.86
+	
+	Rsquare= 0.082   (max possible= 0.71 )
+	Likelihood ratio test= 10.22  on 1 df,   p=0.001386
+	Wald test            = 8.56  on 1 df,   p=0.003436
+	Score (logrank) test = 10.11  on 1 df,   p=0.001478
