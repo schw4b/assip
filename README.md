@@ -91,7 +91,7 @@ For hazard ratio see ``exp(-coef)`` below
 	
 ## Non-recurring events
 
-In the traditional survival analysis an event is generally associated with "death", and only one event is possible per subject (non-recurring events). However, recurring events relax this assumption and are also widely used in the literature, for example multiple relapses from remission for leukemia patients, repeated heart attacks, recurrence of bladder cancer tumors, or deteriorating episodes of visual acuity (Kleinbaum & Klein, 2005). Recurring analysis can be seen as repeated measures analysis, however one issue is that observations are not completely independent.
+In the traditional survival analysis an event is generally associated with "death", and only one event is possible per subject (non-recurring events). However, recurring events relax this assumption and are also widely used in the literature, for example multiple relapses from remission for leukemia patients, repeated heart attacks, recurrence of bladder cancer tumors, or deteriorating episodes of visual acuity (Kleinbaum & Klein, 2005). Recurring analysis can be seen as repeated measures analysis, however one issue is that observations are not completely independent. Therefore, we also performed the analysis using non-recurring events.
 
 ### Restructure data for non-recurring events
 	E='Suizidversuch (mind. 1)'
