@@ -24,6 +24,7 @@ these are based on twenty imputed dataset.
 # load original data
 mydata =  data[, c("ITT", 
                    "repeater_t2", "repeater_t3", "repeater_t4", "repeater_t5",
+                   "t2_SV_6Mo", "t3_SV_6Mo", "t4_SV_6Mo", "t5_SV_6Mo",
                    "stat_days_t1", "stat_days_t2", "stat_days_t3", "stat_days_t4", "stat_days_t5",
                    "sum_stat_12months", "sum_stat_24months",
                    "amb_sess_t1_6M",
