@@ -1,24 +1,50 @@
-# by Simon Schwab, schwab@puk.unibe.ch, 2015
-# University Hospital of Psychiatry, and University of Bern.
+---
+title: "ASSIP"
+author: "Simon Schwab"
+date: "14/07/2020"
+output: pdf_document
+---
 
-# Statistical analysis for the ASSIP trial
-# Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2016).
-# A Novel Brief Therapy for Patients Who Attempt Suicide: A 24-months follow-up
-# randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
-# PLoS Medicine. Manuscript accepted for publication.
+by Simon Schwab, schw4b@gmail.com, 2015
+University Hospital of Psychiatry, and University of Bern.
 
-# This is a short analysis script to replicate the main findings of our study
-# using the original data. Results in our paper may slightly differ because
-# these are based on twenty imputed dataset.
+Statistical analysis for the ASSIP trial
 
-# install and load required package(s)
-install.packages("survival")
+Gysin-Maillart A, Schwab S, Soravia LM, Megert M, & Michel K (2016).
+A Novel Brief Therapy for Patients Who Attempt Suicide: A 24-months follow-up
+randomized controlled study of the Attempted Suicide Short Intervention Program (ASSIP).
+PLoS Medicine. Manuscript accepted for publication.
+
+This is a short analysis script to replicate the main findings of our study
+using the original data. Results in our paper may slightly differ because
+these are based on twenty imputed dataset.
+
+# Create minimal dataset 
+```{r, eval=FALSE}
+# load original data
+mydata =  data[, c("ITT", 
+                   "repeater_t2", "repeater_t3", "repeater_t4", "repeater_t5",
+                   "stat_days_t1", "stat_days_t2", "stat_days_t3", "stat_days_t4", "stat_days_t5",
+                   "sum_stat_12months", "sum_stat_24months",
+                   "amb_sess_t1_6M",
+                   "bdisum2", "bdisum3", "bdisum4", "bdisum5",
+                   "BSS_T2", "BSS_T3", "BSS_T4", "BSS_T5"
+)] 
+
+save(mydata, file = "assip.RData")
+```
+
+# Required packages
+```{r}
+# install.packages("survival")
 library(survival)
+```
 
-# loading  data ----
-setwd("~/workspace/assip/")
+# Load data
+```{r}
+setwd("~/Data/assip/")
 load("assip.RData")
-summary(mydata)
+#summary(mydata)
 
 repeater = c(
   as.character(mydata$repeater_t2), #  6 months
@@ -29,19 +55,33 @@ repeater = c(
 repeater = as.factor(repeater) == 'Suizidversuch (mind. 1)'
 group = rep(mydata$ITT,4) # repeat group coding for the 4 follow-up's
 time = c(rep(6,120), rep(12,120), rep(18,120), rep(24,120)) # follow-up month
-# survival (Kaplan-Meier) ----
+```
+
+# Analysis with attempts as recurring events
+
+## Survival (Kaplan-Meier)
+```{r}
 fit = survfit(Surv(time, repeater) ~ group, type="kaplan-meier")
 summary(fit)
-# group difference (Mantel-Haenszel) ----
+```
+
+## Group difference
+```{r}
 survdiff(Surv(time, repeater) ~ group, rho=0)
-# Cox hazard for discrete data ----
+```
+
+## Cox hazard for discrete data
+```{r}
 hazard <- coxph(Surv(time, repeater) ~ group, ties="exact")
 summary(hazard)
+```
+# Analysis with attempts as non-recurring events
 
-# Restructure data for non-recurring events ----
-E='Suizidversuch (mind. 1)'
-time=rep(NA,120)
-event=rep(NA,120)
+## Restructure data
+```{r}
+E = 'Suizidversuch (mind. 1)'
+time = rep(NA, 120)
+event = rep(NA, 120)
 for (i in 1:120) {
   f = c(mydata$repeater_t2[i]==E, mydata$repeater_t3[i]==E, mydata$repeater_t4[i]==E, mydata$repeater_t5[i]==E)
   if (sum(f, na.rm = T) > 0) { # time to event
@@ -52,16 +92,27 @@ for (i in 1:120) {
     else {time[i]=0; event[i]=0}
   }
 }
-# survival (Kaplan-Meier) ----
+```
+
+## Survival (Kaplan-Meier)
+```{r}
 fit = survfit(Surv(time, event) ~ mydata$ITT, type="kaplan-meier")
 summary(fit)
-# group difference (Mantel-Haenszel) ----
+```
+
+## Group difference
+```{r}
 survdiff(Surv(time, event) ~ mydata$ITT, rho=0)
-# Cox hazard for discrete data ----
+```
+
+## Cox hazard for discrete data
+```{r}
 hazard <- coxph(Surv(time, event) ~ mydata$ITT, ties="exact")
 summary(hazard)
+```
 
-# Non-recurring analysis of imputed data ----
+```{r, eval=FALSE}
+## Non-recurring analysis of imputed data
 load("repeaterImp.Rdata")
 E='Suizidversuch (mind. 1)'
 
@@ -88,3 +139,5 @@ for (m in 1:20) {
   risk[m]=exp(-s$coefficients[1])
 }
 c(median(1-risk), min(1-risk), max(1-risk))
+```
+
